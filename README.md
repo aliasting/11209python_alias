@@ -10,7 +10,7 @@
 ## 作業
 [2023_09_22作業]
 
-[2023_09_20作業]
+[2023_09_20作業](https://github.com/aliasting/11209python_alias/blob/main/lesson7_2.ipynb)
 
 [2023_09_18作業](lesson6_2.ipynb)
 
