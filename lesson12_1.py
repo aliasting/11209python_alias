@@ -3,6 +3,8 @@ class Person:
         self.__name = n
         self.weight = weight
         self.height = height
+    
+    
     #property
     @property
     def name(self) -> str:
@@ -11,6 +13,7 @@ class Person:
     @property
     def getBMI(self) -> float:
         return self.bmi()
+
 
     #method
     def bmi(self) -> float:
@@ -25,3 +28,4 @@ if __name__ == '__main__':
     #p1.name = "vivan"
     print(p1.name)    
     print(p1.getBMI)
+    
