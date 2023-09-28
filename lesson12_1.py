@@ -28,4 +28,5 @@ if __name__ == '__main__':
     #p1.name = "vivan"
     print(p1.name)    
     print(p1.getBMI)
+  
     
