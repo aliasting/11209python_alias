@@ -11,8 +11,7 @@ class Player:
    
    def __play(self) -> int:
       
-      import random
-      import pyinputplus as pyip
+      
       min = 1
       max = 6
       scores=0
