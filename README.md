@@ -8,6 +8,18 @@
 2.數值計算與資料輸入
 
 ## 作業
+
+[2023_10_18作業](https://github.com/aliasting/11209python_alias/tree/main/1018%E4%BD%9C%E6%A5%AD)
+
+[2023_10_16作業](https://github.com/aliasting/11209python_alias/tree/main/1016%E4%BD%9C%E6%A5%AD)
+
+[2023_10_11作業]
+
+[整合line使用]
+
+[line_bot]
+
+
 [2023_10_05作業](https://github.com/aliasting/1005hw)
 
 [2023_10_03作業]
