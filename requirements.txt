@@ -1,2 +1,4 @@
 PyInputPlus
 requests
+lineTool
+matplotlib
