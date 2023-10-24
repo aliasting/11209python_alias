@@ -21,7 +21,15 @@ class GetPassword(Dialog):
         tk.Label(master, text='收盤價:').grid(row=4, sticky=tk.W)
         tk.Label(master, text='調整後收盤價:').grid(row=5, sticky=tk.W)
         tk.Label(master, text='成交量:').grid(row=6, sticky=tk.W)
+        tk.Label(master, text=self.values[0]).grid(row=0, column=1, sticky='E')
+        tk.Label(master, text=self.values[1]).grid(row=1, column=1, sticky='E')
+        tk.Label(master, text=self.values[2]).grid(row=2, column=1, sticky='E')
+        tk.Label(master, text=self.values[3]).grid(row=3, column=1, sticky='E')
+        tk.Label(master, text=self.values[4]).grid(row=4, column=1, sticky='E')
+        tk.Label(master, text=self.values[5]).grid(row=5, column=1, sticky='E')
+        tk.Label(master, text=self.values[6]).grid(row=6, column=1, sticky='E')
 
+        '''
         self.newpw0 = tk.Entry(master, width=16, show='*')
         self.newpw1 = tk.Entry(master, width=16, show='*')
         self.newpw2 = tk.Entry(master, width=16, show='*')
@@ -39,7 +47,7 @@ class GetPassword(Dialog):
         self.newpw5.grid(row=5, column=1, sticky=tk.W)
         self.newpw6.grid(row=6, column=1, sticky=tk.W)
 
-        return self.newpw0
+        return self.newpw0 '''
     
     def buttonbox(self):
         '''add standard button box.
