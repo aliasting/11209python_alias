@@ -1,7 +1,8 @@
 import requests  # 讓人一進來就看到指令
+import sqlite3
 
 
-def download_youbike_data():
+def download_youbike_data()->list[dict]:#為list,用dict
     """
     下載台北市youbike資料2.0
     https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json
