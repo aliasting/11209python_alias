@@ -17,7 +17,7 @@
 
 [整合line使用](https://github.com/aliasting/11209python_alias/tree/main/line)
 
-[line_bot]
+[line_bot](https://github.com/aliasting/line_bot)
 
 
 [2023_10_05作業](https://github.com/aliasting/1005hw)
