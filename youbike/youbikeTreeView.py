@@ -34,3 +34,13 @@ class YoubikeTreeView(ttk.Treeview):
         for site in site_datas:
             self.insert('','end',values=site)
 
+    def search(self,result):
+        '''
+        搜尋內容
+        '''
+        #清除所有內容
+        for i in self.get_children():
+            self.delete(i)
+
+        for results in result:
+            self.insert('','end',values=results)

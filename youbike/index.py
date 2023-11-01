@@ -16,29 +16,40 @@ class Window(tk.Tk):
             self.destroy()           
         
 
-        #---------建立介面------------------------
+        #---------建立介面用topFrame----------------
         #print(datasource.lastest_datetime_data())
         topFrame = tk.Frame(self,relief=tk.GROOVE,borderwidth=1)
         tk.Label(topFrame,text="台北市youbike及時資料",font=("arial", 20), bg="#333333", fg='#ffffff',padx=10,pady=10).pack(padx=20,pady=20)
         topFrame.pack(pady=30)
 
+        #-------使用Tkinter裡的bottom Frame-------
         bottomFrame = tk.Frame(self)
+
         #---------------建立treeView---------------
         self.youbikeTreeView = YoubikeTreeView(bottomFrame,show="headings",columns=('sna','mday','sarea','ar','tot','sbi','bemp'))
         self.youbikeTreeView.pack(side='left')
+
+        #-----------------設定scrollbar--------------------
         vsb = ttk.Scrollbar(bottomFrame, orient="vertical", command=self.youbikeTreeView.yview)
         vsb.pack(side='left',fill='y')
         self.youbikeTreeView.configure(yscrollcommand=vsb.set)
+
         bottomFrame.pack(pady=30)
+
         print(datasource.search_sitename('三'))
         
-
+    #----search data----1101hw
+    def search_data(self):
+        search_term = self.e.get()
+        result = datasource.search_sitename(search_term)
+        self.youbikeTreeView.search(result = result) 
         
 
 
 def main():    
     def update_data(w:Window)->None:
         datasource.updata_sqlite_data()
+        
         #-----------更新treeView資料---------------
         lastest_data = datasource.lastest_datetime_data()
         w.youbikeTreeView.update_content(lastest_data)
