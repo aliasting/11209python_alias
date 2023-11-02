@@ -14,8 +14,8 @@ class Window(tk.Tk):
             datasource.update_sqlite_data()
         except Exception:                     
             messagebox.showerror('錯誤','將關閉應用程式\n請稍後再試')
-            self.destroy()                 #關閉視窗
-
+            self.destroy()   #關閉視窗
+        
         #-------------------建立視窗介面--------------------------
 
         #-----使用top Frame-----
@@ -35,22 +35,30 @@ class Window(tk.Tk):
         bottomFrame = tk.Frame(self)
 
         #---------------treeview----------------------------
-        self.youbikeTreeView = YoubikeTreeView(bottomFrame,columns=('sna','mday','sarea','ar','tot','sbi','bemp'),show="headings") #加'self.' => 在整個class中被公開使用
+        self.youbikeTreeView = YoubikeTreeView(bottomFrame,columns=('sna','mday','sarea','ar','tot','sbi','bemp'),show="headings") 
+        #加'self.'在整個class中被公開使用
         self.youbikeTreeView.pack(side='left')
         
         #---------------scrollbar---------------------------
         self.scrollbar = ttk.Scrollbar(bottomFrame, orient="vertical", command=self.youbikeTreeView.yview)
         self.scrollbar.pack(side='left',fill='y')
         self.youbikeTreeView.configure(yscrollcommand=self.scrollbar.set)
-
+        #-----bottom frame------
         bottomFrame.pack(pady=30)
+        print('下載成功1')
+
+    #----建立搜尋----
+    middleFrame = ttk.LableFrame(selftext='站點名稱搜尋')
+    tk.Label(middleFrame,text='站點搜尋:').pack(side='left')
+    self.search_entry = tk.Entry(middleFrame)
+    self.search_entry.pack(sude='left')
     
-    #----search data----
+    '''
     def search_data(self):
         search_term = self.e.get()
         result = datasource.search_sitename(search_term)
         self.youbikeTreeView.search(result = result)
-
+        print('下載成功2')'''
 
 def main():
     def update_data(w:Window)->None:
@@ -61,12 +69,14 @@ def main():
         w.youbikeTreeView.update_content(lastest_data)
 
         window.after(180*1000,update_data,w)
+    print('下載成功3')
 
     window = Window()
     window.title('台北市youbike2.0')
     window.resizable(width=False,height=False)
     update_data(window)
     window.mainloop()
+    print('下載成功4')
 
 
 if __name__ == '__main__':
