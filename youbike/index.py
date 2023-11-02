@@ -19,7 +19,7 @@ class Window(tk.Tk):
         #---------建立介面------------------------
         #print(datasource.lastest_datetime_data())
         topFrame = tk.Frame(self,relief=tk.GROOVE,borderwidth=1)
-        tk.Label(topFrame,text="台北市youbike及時資料",font=("arial", 20), bg="#333333", fg='#ffffff',padx=10,pady=10).pack(padx=20,pady=20)
+        tk.Label(topFrame,text="台北市youbike即時資料",font=("arial", 20), bg="#333333", fg='#ffffff',padx=10,pady=10).pack(padx=20,pady=20)
         topFrame.pack(pady=30)
         #---------------------------------------
 
