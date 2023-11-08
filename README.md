@@ -8,6 +8,7 @@
 2.數值計算與資料輸入
 
 ## 作業
+[2023_11_02作業](https://github.com/aliasting/11209python_alias/blob/main/1102%E4%BD%9C%E6%A5%AD.ipynb)
 
 [2023_10_18作業](https://github.com/aliasting/11209python_alias/tree/main/1018%E4%BD%9C%E6%A5%AD)
 

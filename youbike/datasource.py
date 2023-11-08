@@ -16,6 +16,7 @@ def __download_youbike_data()->list[dict]:
 
 def __create_table(conn:sqlite3.Connection):    
     cursor = conn.cursor()
+    #cursor.fetchall()返回多個rows,如果沒有則返回()
     cursor.execute(
         '''
         CREATE TABLE  IF NOT EXISTS 台北市youbike(
@@ -38,6 +39,7 @@ def __create_table(conn:sqlite3.Connection):
 
 def __insert_data(conn:sqlite3.Connection,values:list[any])->None:
     cursor = conn.cursor()
+    #cursor.fetchall()返回多個rows,如果沒有則返回()
     sql = '''
     REPLACE INTO 台北市youbike(站點名稱,行政區,更新時間,地址,總車輛數,可借,可還)
         VALUES(?,?,?,?,?,?,?)
@@ -60,6 +62,7 @@ def updata_sqlite_data()->None:
 def lastest_datetime_data():
     conn = sqlite3.connect("youbike.db")
     cursor = conn.cursor()
+    #cursor.fetchall()返回多個rows,如果沒有則返回()
     sql = '''
     SELECT 站點名稱,MAX(更新時間) AS 更新時間,行政區,地址,總車輛數,可借,可還
     FROM 台北市youbike
@@ -67,7 +70,27 @@ def lastest_datetime_data():
     '''
     cursor.execute(sql)
     rows = cursor.fetchall()
+    #cursor.fetchall()返回多個rows,如果沒有則返回()
     cursor.close()
     conn.close()
     
+    return rows
+
+
+
+#------------search----------
+def search_sitename(word:str) -> list[tuple]:
+    conn = sqlite3.connect("youbike.db")
+    cursor = conn.cursor()
+    sql = '''
+        SELECT 站點名稱, MAX(更新時間) AS 更新時間,行政區,地址,總車輛數,可借,可還
+        FROM 台北市youbike
+        GROUP BY 站點名稱
+        HAVING 站點名稱 like ?
+        '''
+    cursor.execute(sql,[f'%{word}%'])
+    rows = cursor.fetchall() 
+    #cursor.fetchall()返回多個rows,如果沒有則返回()
+    cursor.close()
+    conn.close()
     return rows
