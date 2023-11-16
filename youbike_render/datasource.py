@@ -2,6 +2,8 @@ import requests
 import psycopg2
 import password as pw
 
+threadRun = True  # 次執行緒是否執行
+
 
 def __download_youbike_data() -> list[dict]:
     """
@@ -65,18 +67,21 @@ def updata_render_data() -> None:
 
     __create_table(conn)
     for item in data:
-        __insert_data(
-            conn,
-            [
-                item["sna"],
-                item["sarea"],
-                item["mday"],
-                item["ar"],
-                item["tot"],
-                item["sbi"],
-                item["bemp"],
-            ],
-        )
+        if threadRun == True:  # 檢查次執行緒是否執行
+            __insert_data(
+                conn,
+                [
+                    item["sna"],
+                    item["sarea"],
+                    item["mday"],
+                    item["ar"],
+                    item["tot"],
+                    item["sbi"],
+                    item["bemp"],
+                ],
+            )
+        else:
+            break  # 次執行緒強制執行
     conn.close()
 
 
@@ -116,10 +121,13 @@ def search_sitename(word: str) -> list[tuple]:
     )
     cursor = conn.cursor()
     sql = """
-        SELECT 站點名稱,MAX(更新時間) AS 更新時間,行政區,地址,總車輛數,可借,可還
+        SELECT *
         FROM 台北市youbike
-        GROUP BY 站點名稱,更新時間,行政區,地址,總車輛數,可借,可還
-        HAVING 站點名稱 like %s
+        WHERE (更新時間,站點名稱) IN (
+	          SELECT MAX(更新時間),站點名稱
+	          FROM 台北市youbike
+	            GROUP BY 站點名稱
+        )  AND 站點名稱 like %s
         """
     cursor.execute(sql, [f"%{word}%"])
     rows = cursor.fetchall()

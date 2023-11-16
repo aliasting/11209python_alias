@@ -6,7 +6,6 @@ from tkinter import ttk
 from tkinter import messagebox
 from youbikeTreeView import YoubikeTreeView
 from threading import Timer
-import sys
 
 
 class Window(tk.Tk):
@@ -78,10 +77,14 @@ def main():
             # window.destroy()
 
         lastest_data = datasource.lastest_datetime_data()
-        # w.youbikeTreeView.update_content(lastest_data)
-        w.youbikeTreeView.update_content(lastest_data)
+        try:
+            w.youbikeTreeView.update_content(lastest_data)
+        except RuntimeError:  # 次執行中止會產生RuntimeError的錯誤
+            return
+
         # w.after(5*60*1000,update_data,w) #每隔5分鐘
         t = Timer(5 * 60, update_data, args=(window,))
+
         t.start()
 
     global t, window
@@ -89,27 +92,23 @@ def main():
     window.title("台北市youbike2.0")
     # window.geometry('600x300')
     window.resizable(width=False, height=False)
-    window.protocol("WM_DELETE_WINDOW", on_closing)  # 1116更
+    window.protocol("WM_DELETE_WINDOW", on_closing)
     lastest_data = datasource.lastest_datetime_data()
     window.youbikeTreeView.update_content(lastest_data)
     # window.after(1000,update_data,window)
-    #t = Timer(1, update_data, args=(window,))
-
-    
+    t = Timer(1, update_data, args=(window,))
     print(id(t))
     t.start()
     window.mainloop()
 
 
 def on_closing():
+    datasource.threadRun = False  # 結束次執行緒執行
     window.destroy()
     t.cancel()
 
 
 if __name__ == "__main__":
-    main()
-
     t = None
     window = None
-    main()    
-    
+    main()
